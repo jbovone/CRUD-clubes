@@ -1,0 +1,24 @@
+{
+  "name": "crud-clubes",
+  "version": "1.0.0",
+  "description": "A sample interface CRUD: create retrieve update delete. It consumes football-data.org API and format de data into a crud interface.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbovone/CRUD-clubes.git"
+  },
+  "author": "jbovone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbovone/CRUD-clubes/issues"
+  },
+  "homepage": "https://github.com/jbovone/CRUD-clubes#readme"
+}
