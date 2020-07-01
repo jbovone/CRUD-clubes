@@ -1,14 +1,27 @@
 {
   "name": "crud-clubes",
   "version": "1.0.0",
-  "description": "A sample interface CRUD: create retrieve update delete. It consumes football-data.org API and format de data into a crud interface.",
+  "description": "A sample interface CRUD: create read update delete. It consumes football-data.org API and format de data into a crud interface.",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
-    "express-handlebars": "^4.0.4"
+    "express-handlebars": "^4.0.4",
+    "multer": "^1.4.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cypress": "^4.9.0",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-cypress": "^2.11.1",
+    "eslint-plugin-import": "^2.21.2",
+    "nodemon": "^2.0.4"
+  },
   "scripts": {
+    "eslint": "eslint --init",
+    "fix": "eslint --fix",
+    "dev": "nodemon ./src/index.js",
+    "cypress": "cypress open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
