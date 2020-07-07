@@ -1,4 +1,5 @@
 const path = require('path');
+const multer = require('multer');
 
 module.exports = (app, express) => {
   app.use('/styles', express.static(path.join(__dirname, 'styles')));
