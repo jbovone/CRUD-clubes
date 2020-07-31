@@ -1,0 +1,74 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/tippy.js/dist/tippy.css";
+img {
+    object-fit: contain !important;
+    padding: 10px;
+    max-height: 200px;
+}
+.card {
+    max-height: 600px;
+    width: 600px !important;
+}
+p {
+    margin: 0px;
+}
+.media {
+    position: relative;
+    img {
+        margin-left: 10px;
+    }
+}
+.icon {
+    height: 25px;
+    width: 25px;
+    margin: 8px;
+    z-index: 9;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.read {
+    background-image: url("../eye.svg");
+}
+.update {
+    background-image: url("../pencil-square.svg");
+}
+.delete {
+    background-image: url("../trash.svg");
+}
+.confirm {
+    background-image: url("../check-circle.svg");
+}
+.cancel {
+    background-image: url("../x-circle.svg");
+}
+
+#team-list {
+    max-height: 100vh;
+    max-width: 800px;
+}
+
+.pop-up {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+#viewer-pop-up {
+    padding: 5px 20px;
+    label {
+        margin-bottom: 1px;
+    }
+    input {
+        width: 100%;
+        margin-bottom: 7px;
+        border-radius: 2px;
+        padding: 5px;
+    }
+    #form-btn {
+        width: 90%;
+        margin: 5px;
+    }
+}
