@@ -1,27 +1,10 @@
 {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true,
     "eslint.alwaysShowStatus": true,
     "eslint.format.enable": true,
     "eslint.codeActionsOnSave.mode": "all",
-    "eslint.options": {},
-    "liveSassCompile.settings.formats": [
-        {
-            "extensionName": ".css",
-            "format": "compressed",
-            "savePath": "/src/assets/css"
-        }
-    ],
-    "liveSassCompile.settings.excludeList": [
-        "**/node_modules/**",
-        ".vscode/**"
-    ],
-    "liveSassCompile.settings.generateMap": true,
-    "liveSassCompile.settings.autoprefix": [
-        "> 1%",
-        "last 2 versions"
-    ],
-    "editor.quickSuggestions": true,
-    "editor.quickSuggestions": {
-        "other": false
+    "eslint.options": {
+    
     }
 }

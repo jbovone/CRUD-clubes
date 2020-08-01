@@ -1,4 +1,3 @@
-const KEYS = require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
@@ -9,12 +8,8 @@ const hbs = exphbs.create({
   defaultLayout: 'index',
   layoutsDir: path.join(__dirname, 'public', 'layouts'),
   partialsDir: path.join(__dirname, 'public', 'partials'),
-  helpers: {
-    paginatorPage(previous) {
-      return previous + 1
-    }
-  },
 });
+
 const app = express();
 
 app.set('views', path.join(__dirname, 'public'));
@@ -23,4 +18,4 @@ app.set('view engine', '.hbs');
 route(app, express);
 
 const PORT = 8080;
-app.listen(process.env.PORT || PORT, () => console.log('running 8080', KEYS));
+app.listen(process.env.PORT || PORT);

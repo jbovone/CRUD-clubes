@@ -6,14 +6,12 @@
     },
     "extends": [
         "airbnb-base",
-        "plugin:cypress/recommended",
-        "eslint-plugin-jquery"
+        "plugin:cypress/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": 11
     },
     "rules": {
-        "no-plusplus": "off",
-        "prefer-const": "off",
+        "no-plusplus": "off"
     }
 }
