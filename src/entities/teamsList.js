@@ -14,15 +14,15 @@ class Teamlist {
 
   static setPagination(teams) {
     const teamsPerPage = 10;
-    let pagedTeams = [];
+    let prependTeams = [];
     for (let i = 0; i < teams.length; i++) {
       const page = [];
       for (let j = 0; j < teamsPerPage; j++) {
         page.push(teams[j]);
       }
-      pagedTeams[i] = page;
+      prependTeams[i] = page;
     }
-    return pagedTeams
+    return prependTeams
   }
 }
 module.exports = Teamlist;

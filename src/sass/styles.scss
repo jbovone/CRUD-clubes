@@ -5,10 +5,6 @@ img {
     padding: 10px;
     max-height: 200px;
 }
-.card {
-    max-height: 600px;
-    width: 600px !important;
-}
 p {
     margin: 0px;
 }
@@ -27,20 +23,24 @@ p {
     background-repeat: no-repeat;
     background-size: cover;
 }
+.icon:hover,
+.icon:focus {
+    filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
 .read {
-    background-image: url("../eye.svg");
+    background-image: url("../img/eye.svg");
 }
 .update {
-    background-image: url("../pencil-square.svg");
+    background-image: url("../img/pencil-square.svg");
 }
 .delete {
-    background-image: url("../trash.svg");
+    background-image: url("../img/trash.svg");
 }
 .confirm {
-    background-image: url("../check-circle.svg");
+    background-image: url("../img/check-circle.svg");
 }
 .cancel {
-    background-image: url("../x-circle.svg");
+    background-image: url("../img/x-circle.svg");
 }
 
 #team-list {
