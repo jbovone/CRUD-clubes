@@ -12,7 +12,7 @@ context('Pagination', () => {
   });
   it('tests a page number',() => {
     cy.get('#team-list').click()
-    .find('[href="/teams/2"]')
+    .find('a[href="/teams/2"]')
     cy.get('#team-list').click() 
 
     })
