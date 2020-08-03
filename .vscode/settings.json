@@ -1,4 +1,6 @@
 {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "javascript.format.enable": true,
     "editor.formatOnSave": true,
     "eslint.alwaysShowStatus": true,
     "eslint.format.enable": true,
@@ -21,7 +23,4 @@
         "last 2 versions"
     ],
     "editor.quickSuggestions": true,
-    "editor.quickSuggestions": {
-        "other": false
-    }
 }

@@ -12,17 +12,17 @@ class Teamlist {
     return Object.keys(team);
   }
 
-  static setPagination(teams) {
-    const teamsPerPage = 10;
-    let prependTeams = [];
-    for (let i = 0; i < teams.length; i++) {
-      const page = [];
-      for (let j = 0; j < teamsPerPage; j++) {
-        page.push(teams[j]);
+  static setPagination(teams, teamsPerPage = 10) {
+    let prependTeams = [null];
+    for (let i = 1; i <= teams.length; i += teamsPerPage) {
+      let page = [];
+      for (let j = i; j <= teamsPerPage + i; j++) {
+        page.push(teams[j])
       }
-      prependTeams[i] = page;
+      prependTeams.push(page)
     }
     return prependTeams
   }
 }
+
 module.exports = Teamlist;

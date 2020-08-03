@@ -27,13 +27,13 @@ p {
 .icon:focus {
     filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
 }
-.read {
+.Read {
     background-image: url("../img/eye.svg");
 }
-.update {
+.Update {
     background-image: url("../img/pencil-square.svg");
 }
-.delete {
+.Delete {
     background-image: url("../img/trash.svg");
 }
 .confirm {
@@ -44,10 +44,18 @@ p {
 }
 
 #team-list {
-    max-height: 100vh;
     max-width: 800px;
 }
-
+.jumbotron{
+    height: 60vh;
+    color: white;
+    background: url("../img/stadium.jpg");
+    background-position: bottom;
+    background-color: rgb(10, 10, 10);
+    background-repeat: no-repeat;
+    background-size: 200%;
+    background-attachment: fixed ;
+}
 .pop-up {
     background: #333;
     color: white;
@@ -72,3 +80,21 @@ p {
         margin: 5px;
     }
 }
+
+body>footer {
+    height: 10vh;
+    margin-top: 100px;
+    width: 100%;
+    background-color: rgb(53, 53, 53);
+    display: flex;
+    flex-direction: row;
+}
+ .team-list-button-nav{
+    display: flex;
+    flex-flow: row-reverse;
+    align-items: center;
+    max-width: 800px;
+    button{
+        padding: 15px 10px;
+    }
+ }

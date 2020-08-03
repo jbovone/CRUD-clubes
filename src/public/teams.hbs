@@ -1,7 +1,7 @@
-<section class="container col-12" id="team-list">
+<section class="container col-12" id="team-list" {{#each data.entries as |keys|}}data-{{keys}}="" {{/each}}>
+    {{>teams-buttons-nav}}
     {{#each data.teams as |team|}}
     <div class="media border" id="list-{{team.id}}" {{#each team as |value key|}}data-{{key}}="{{value}}" {{/each}}>
-
         <img src="{{team.crestUrl}}" class=" media-icon mr-3" style="width: 100px; height:100px;" alt="...">
         <div class="media-body">
             <h4 class="mt-0">{{team.name}}</h4>
@@ -11,17 +11,8 @@
         <footer style="align-self: flex-end;">
             {{>team-crud-icons}}
         </footer>
-
     </div>
     {{/each}}
-    <nav aria-label="Team List Pagination">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" target="" href="#">Previous</a></li>
-            {{#each data.teams as |page index|}}
-            <li class="page-item page-{{paginatorPage index}}"><a class="page-link"
-                    href="/teams/{{paginatorPage index}}/">{{paginatorPage index}}</a></li>
-            {{/each}}
-            <li class="page-item"><a class="page-link" target="" href="#">Next</a></li>
-        </ul>
-    </nav>
+    {{>paginator}}
 </section>
+ 
