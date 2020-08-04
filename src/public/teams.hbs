@@ -1,5 +1,5 @@
 <section class="container col-12" id="team-list" {{#each data.entries as |keys|}}data-{{keys}}="" {{/each}}>
-    {{>teams-buttons-nav}}
+    {{>teams-nav}}
     {{#each data.teams as |team|}}
     <div class="media border" id="list-{{team.id}}" {{#each team as |value key|}}data-{{key}}="{{value}}" {{/each}}>
         <img src="{{team.crestUrl}}" class=" media-icon mr-3" style="width: 100px; height:100px;" alt="...">

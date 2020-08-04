@@ -1,5 +1,20 @@
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "../../node_modules/tippy.js/dist/tippy.css";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/bootstrap-reboot.scss";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/close";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/utilities";
+@import "../../node_modules/bootstrap/scss/spinners";
+@import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+@import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/pagination";
+@import "../../node_modules/bootstrap/scss/jumbotron";
+@import "../../node_modules/bootstrap/scss/media";
+@import "../../node_modules/bootstrap/scss/modal";
+
+
 img {
     object-fit: contain !important;
     padding: 10px;
@@ -36,25 +51,15 @@ p {
 .Delete {
     background-image: url("../img/trash.svg");
 }
-.confirm {
-    background-image: url("../img/check-circle.svg");
-}
-.cancel {
-    background-image: url("../img/x-circle.svg");
-}
 
 #team-list {
     max-width: 800px;
 }
 .jumbotron{
-    height: 60vh;
+    height: 40vh;
     color: white;
-    background: url("../img/stadium.jpg");
-    background-position: bottom;
-    background-color: rgb(10, 10, 10);
-    background-repeat: no-repeat;
-    background-size: 200%;
-    background-attachment: fixed ;
+    background: #333;
+
 }
 .pop-up {
     background: #333;
@@ -87,7 +92,9 @@ body>footer {
     width: 100%;
     background-color: rgb(53, 53, 53);
     display: flex;
-    flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   color: white;
 }
  .team-list-button-nav{
     display: flex;
@@ -98,3 +105,33 @@ body>footer {
         padding: 15px 10px;
     }
  }
+ .team-list-nav{
+     max-height: 30px;
+    display: flex;
+    flex-flow: column-reverse wrap;
+    justify-items: space-evenly;
+ }
+ #status-bar{
+  flex: 2;
+  text-align: center;
+  color:theme-color-level(primary, -2);
+ }
+
+ .active-changes {
+    animation-name: alert;
+    animation-timing-function:ease-in-out;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
+
+     @keyframes alert {
+         50%{
+           transform: scale(1.006) skew(1deg);
+           color: $red;
+         }
+     }
+}
+.disabled {
+    color: gray !important;
+    opacity: 0.5;
+    pointer-events: none;
+}

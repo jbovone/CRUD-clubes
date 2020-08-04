@@ -1,21 +1,24 @@
-/// <reference types= "jquery" />
+/// <reference types= "jQuery" />
 
 let listActionsCache = {
   deletedIds: [],
   newEntries: [],
   setDeletion(id = 'list-0') {
     this.deletedIds.push(id);
-    $('#status-bar').text('Unsaved Changes')
+    updateStatus()
   },
   setNewEntrie(entrie){
    this.newEntries.push(entrie)
-    $('#status-bar').text('Unsaved Changes')
+   updateStatus()
   }
 };
 let stateCreatingTeam = false
+document.querySelector('.Next').setAttribute('href',  setPage(1, $('.Next')))
+document.querySelector('.Previous').setAttribute('href', setPage(-1, $('.Previous')))
 
 let $targetContainer;
 $('.Read, .Update, .Delete').on('click', function(e) {
+  cleanModal();
   const tagName = setTagName(this)
   $targetContainer = e.target.closest('.media')
   if(tagName === 'Delete') return
@@ -25,8 +28,6 @@ $('.Read, .Update, .Delete').on('click', function(e) {
     }
     return viewer;
   })(appendViewer, appendForm);
-
-  $('#viewer-pop-up .modal-body').empty();
   Object.entries($targetContainer.dataset).forEach((map) => {
     if (map[0] !== 'id' && map[0] !== 'seedlist') assingModal(map[0], map[1], tagName);
   });
@@ -35,8 +36,8 @@ $('.Read, .Update, .Delete').on('click', function(e) {
 function setTagName(element){
   return ['Read', 'Update', 'Delete'].filter(tag=>element.classList.contains(tag))[0]
 }
-$('.Create').on('click', function(e){ // integrar esto a la funcion anterior pordria ser deseable.
-  $('#viewer-pop-up .modal-body').empty()
+$('.Create').on('click', function(e){ // integrar esto a la funcion anterior podria ser deseable.
+  cleanModal();
   $targetContainer = $('.media').clone()[0]
   const data = document.querySelector('#team-list').dataset
    Object.keys(data).forEach((key) => {
@@ -52,44 +53,32 @@ function appendForm(name, value, tag) {
   $('#viewer-pop-up .modal-body').append($label, $input);
   $input.val(`${value}`);
 }
-function appendViewer(name, value) {
-  $('#form-save').addClass('invisible');
-  $('#viewer-pop-up .modal-title').text('Overview Team');
+function appendViewer(name, value, title = 'Overview Team') {
+  $('#viewer-pop-up .modal-title').text(title);
   const $name = $(`<div>${name}</div>`);
   const $value = $(`<div>${value}</div>`);
   $('#viewer-pop-up .modal-body').append($name, $value);
 }
 function isEditable(modal){
   let editable = false
-  if (modal === 'Update'){
-    editable = true
-  }
+  if (modal === 'Update') editable = true
   return editable
 }
-
+function cleanModal(){
+  $('#viewer-pop-up .modal-body').empty()
+}
 $('#form-save').on('click', () => {
-  $('#viewer-pop-up .modal-body').children('input').each(function(i) {
-    $targetContainer.dataset[$(this)[0].id] = $(this)[0].value;
-  });
-  const updateMedia = [$targetContainer.dataset.name, $targetContainer.dataset.founded, $targetContainer.dataset.venue]
-  $targetContainer.querySelectorAll('h4, p').forEach((element, i) => element.innerText = updateMedia[i]);
-  if(stateCreatingTeam === true){
-    stateCreatingTeam = false
-    document.querySelector('.media').before($targetContainer)
-    $targetContainer.dataset.id = document.querySelectorAll('.media').length + 1 
-    $targetContainer.querySelector('img').setAttribute('src', $targetContainer.dataset.crestUrl)
-  }  
+  $('#form-save').addClass('invisible');
+  dumpNewDataInContainer()
+  showcaseNewEntrie()
+  if(stateCreatingTeam === true) setCreateSpecificBehavior() 
   listActionsCache.setNewEntrie($targetContainer.dataset);
   console.log(listActionsCache)
 });
-
-
 $('#delete-confirm').on('click', () => {
   $targetContainer.remove();
   listActionsCache.setDeletion($targetContainer.id);
 });
-
-
 const $loading = $('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>') 
 $('#send-data-button').on('click', function(){
   animateSending(this)
@@ -98,11 +87,7 @@ $('#send-data-button').on('click', function(){
     "url": "http://localhost:8080/posteam",
     "contentType": "application/json",
     "data": JSON.stringify(listActionsCache)
-  }).done(
-    setTimeout(()=>{   
-      animateSending(this, true) 
-  }, 500)
-  )
+  }).done((param, param2, param3)=>console.log(param, param2, param3))
 })
 function animateSending(element, staging){
   if(!staging){
@@ -113,5 +98,39 @@ function animateSending(element, staging){
     element.removeAttribute('disabled', false),
     $loading.remove()
     element.innerText ='Send Data'
+  }
+}
+function dumpNewDataInContainer(){
+  $('#viewer-pop-up .modal-body').children('input').each(function(i) {
+    $targetContainer.dataset[$(this)[0].id] = $(this)[0].value;
+  });
+}
+function showcaseNewEntrie(){
+  const updateMedia = [$targetContainer.dataset.name, $targetContainer.dataset.founded, $targetContainer.dataset.venue]
+  $targetContainer.querySelectorAll('h4, p').forEach((element, i) => element.innerText = updateMedia[i]);
+  $targetContainer.querySelector('img').setAttribute('src', $targetContainer.dataset.crestUrl)
+}
+function setCreateSpecificBehavior(){
+  stateCreatingTeam = false
+  document.querySelector('.media').before($targetContainer)
+  $targetContainer.dataset.id = 'PRE_TAG_NEW_ITEM'
+}
+function setPage(paginate, element){
+  const pageNumber = Number(String(window.location).split('=')[1]) 
+  const valid = $('.pagination a').text().match(/\d/g).includes(String(pageNumber + paginate))
+  if(valid){
+    return `/teams?page=${pageNumber + paginate}` 
+  } else {
+    element.addClass('disabled')
+    return ''
+  }
+}
+function updateStatus(cancel = false, message){
+  $('#status-bar').text('Unsaved Changes')
+  $('#status-bar').addClass('active-changes')
+  if(cancel){
+    $('#status-bar').text(message)
+    $('#status-bar').css('color: green !important;')
+    $('#status-bar').removeClass('active-changes')
   }
 }
