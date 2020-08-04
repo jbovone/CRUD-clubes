@@ -13,6 +13,7 @@
 @import "../../node_modules/bootstrap/scss/jumbotron";
 @import "../../node_modules/bootstrap/scss/media";
 @import "../../node_modules/bootstrap/scss/modal";
+@import "modal_styles";
 
 
 img {
@@ -61,42 +62,17 @@ p {
     background: #333;
 
 }
-.pop-up {
-    background: #333;
-    color: white;
-    font-weight: bold;
-    padding: 4px 8px;
-    font-size: 13px;
-    border-radius: 4px;
-}
-#viewer-pop-up {
-    padding: 5px 20px;
-    label {
-        margin-bottom: 1px;
-    }
-    input {
-        width: 100%;
-        margin-bottom: 7px;
-        border-radius: 2px;
-        padding: 5px;
-    }
-    #form-btn {
-        width: 90%;
-        margin: 5px;
-    }
-}
-
 body>footer {
     height: 10vh;
     margin-top: 100px;
     width: 100%;
     background-color: rgb(53, 53, 53);
     display: flex;
-   justify-content: center;
-   align-items: center;
-   color: white;
-}
- .team-list-button-nav{
+    justify-content: center;
+    align-items: center;
+    color: white;
+}   
+ .team-list-button-nav {
     display: flex;
     flex-flow: row-reverse;
     align-items: center;

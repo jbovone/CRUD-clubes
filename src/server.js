@@ -22,12 +22,6 @@ app.set('views', path.join(__dirname, 'public'));
 app.engine('hbs', hbs.engine);
 app.set('view engine', '.hbs');
 route(app, express);
-(async () => {
-  const data = await require('./translator');
-  app.use('/assets', express.static(path.join(__dirname, 'assets')));
-
-
-})()
 
 const PORT = 8080;
 app.listen(process.env.PORT || PORT, () => console.log('running 8080', KEYS));

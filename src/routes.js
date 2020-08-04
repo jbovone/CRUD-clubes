@@ -35,11 +35,13 @@ module.exports = async (app, express) => {
   })
   app.post('/posteam', function(req, res) {
     const valid = validate(req.body)
+    res.status(200)
+    res.send('Updated Succesfully!')
+
     if(valid){
       const alsoValid = updateTeam(req.body)
       if(alsoValid){
-        res.status(200)
-        res.send('Updated Succesfully!')
+ 
       } else{
         res.status(500)
         res.send('Something Went Wrong!')
@@ -48,5 +50,6 @@ module.exports = async (app, express) => {
       res.status(400)
       res.send('Something Went Wrong!')
     }
+
   })
 };
