@@ -1,7 +1,6 @@
 const path = require('path');
-const multer = require('multer');
-const fs = require('fs');
-const validate = require('./request-validation')
+const validate = require('./request-validation').valid
+const uploads = require('./image-service')
 const updateTeam = require('./update-teams')
 
 module.exports = async (app, express) => {
@@ -20,9 +19,7 @@ module.exports = async (app, express) => {
     });
   });
   app.get('/teams', function(req, res) {
-    console.log(req.params, 'request')
-    const {page} = req.query
-    console.log(typeof page)
+    const { page } = req.query //page=1
     res.render('teams', {
       layout: 'index',
       data: {
@@ -43,13 +40,23 @@ module.exports = async (app, express) => {
       if(alsoValid){
  
       } else{
-        res.status(500)
+        res.sendStatus(500)
         res.send('Something Went Wrong!')
       }
     } else {
-      res.status(400)
+      res.sendStatus(400)
       res.send('Something Went Wrong!')
     }
-
+  })
+  app.post('/avatar', uploads, function (req, res) {
+    if(/image/.test(req.file.mimetype)){
+      console.log(req.file)
+      console.log(req.body)
+      res.sendStatus(200)
+    } else{
+      res.sendStatus(200)
+      res.send('NULL')
+    }
   })
 };
+

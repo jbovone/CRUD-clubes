@@ -1,4 +1,9 @@
+.modal-body{
+    display: flex !important;
+    flex-direction: column;
+}
 .pop-up {
+
     background: #333;
     color: white;
     font-weight: bold;
@@ -19,4 +24,18 @@
         width: 90%;
         margin: 5px;
     }
+    .modal-header{
+        align-items: center;
+        img {
+            width: 55px;
+            height: 55px;
+        }
+    }
+    input[type=file]{
+        order: 1;
+    }
+    label[for=cresturl]{
+        order: 1;
+    }
+
 }
