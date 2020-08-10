@@ -1,0 +1,87 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/bootstrap-reboot.scss";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/close";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/utilities";
+@import "../../node_modules/bootstrap/scss/spinners";
+@import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+@import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/pagination";
+@import "../../node_modules/bootstrap/scss/jumbotron";
+@import "../../node_modules/bootstrap/scss/media";
+@import "../../node_modules/bootstrap/scss/modal";
+@import "modal_styles";
+
+
+img {
+    object-fit: contain !important;
+    padding: 10px;
+    max-height: 200px;
+}
+p {
+    margin: 0px;
+}
+.media {
+    position: relative;
+    img {
+        margin-left: 10px;
+    }
+}
+.icon {
+    height: 25px;
+    width: 25px;
+    margin: 8px;
+    z-index: 9;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.icon:hover,
+.icon:focus {
+    filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
+.Read {
+    background-image: url("../img/eye.svg");
+}
+.Update {
+    background-image: url("../img/pencil-square.svg");
+}
+.Delete {
+    background-image: url("../img/trash.svg");
+}
+
+#team-list {
+    max-width: 800px;
+}
+.jumbotron{
+    height: 40vh;
+    color: white;
+    background: #333;
+
+}
+body>footer {
+    height: 10vh;
+    margin-top: 100px;
+    width: 100%;
+    background-color: rgb(53, 53, 53);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}   
+.team-list-button-nav {
+    button{
+        max-width: 70px;
+        padding: 15px 10px;
+    }
+}
+
+
+.disabled {
+    color: gray !important;
+    opacity: 0.5;
+    pointer-events: none;
+}

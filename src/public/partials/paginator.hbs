@@ -1,0 +1,14 @@
+<nav aria-label="Team List Pagination">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link Previous" target="_self" disabled="true" href="">Previous</a></li>
+        {{#each data.pages as |page index|}}
+        {{#if page}} 
+            <li class="page-item"><a class="page-link" target="_self"
+            href="/teams?page={{index}}">{{index}}</a></li>
+        {{/if}}
+        {{/each}}
+        <li class="page-item"><a class="page-link Next" target="_self" href="">Next</a></li>
+    </ul>
+</nav>
+
+

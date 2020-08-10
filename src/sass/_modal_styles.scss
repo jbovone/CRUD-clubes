@@ -1,0 +1,56 @@
+.modal-body{
+    display: flex !important;
+    flex-direction: column;
+}
+.pop-up {
+
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+    padding: 5px 20px;
+    label {
+        margin-bottom: 1px;
+    }
+    span {
+        align-self: center;
+    }
+    input {
+        width: 100%;
+        margin-bottom: 7px;
+        border-radius: 2px;
+        padding: 5px;
+    }
+    #form-btn {
+        width: 90%;
+        margin: 5px;
+    }
+    .modal-header{
+        align-items: center;
+        img {
+            width: 55px;
+            height: 55px;
+        }
+    }
+    input[valid=false]{
+        $border-color: $form-feedback-valid-color;
+    }
+    input[valid=true]{
+        $border-color: $form-feedback-invalid-color;
+    }
+    input[type=file]{
+        order: 1;
+    }
+    label[for=cresturl]{
+        order: 1;
+    }
+    #cresturl + span{
+        order: 1;
+    }
+    #status-bar{
+        flex: auto;
+    }
+
+}

@@ -1,0 +1,18 @@
+<section class="container col-12" id="team-list">
+    {{>teams-nav}}
+    {{#each data.teams as |team|}}
+    <div class="media border" id="list-{{team.id}}" {{#each team as |value key|}}data-{{key}}="{{value}}" {{/each}}>
+        <img src="{{team.cresturl}}" class=" media-icon mr-3" style="width: 100px; height:100px;" alt="...">
+        <div class="media-body">
+            <h4 class="mt-0">{{team.name}}</h4>
+            <p>Founded: {{team.founded}}</p>
+            <p>Home: {{team.venue}}</p>
+        </div>
+        <footer style="align-self: flex-end;">
+            {{>team-crud-icons}}
+        </footer>
+    </div>
+    {{/each}}
+    {{>paginator}}
+</section>
+ 
