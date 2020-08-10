@@ -1,111 +1,68 @@
 
-import {headerControler, bodyController, footerController} from './_html-templates.js'
-import {animateSending, showcaseNewEntrie, updateStatus} from './_ui-visuals.js'
+import { headerControler, bodyController, footerController } from './_html-templates.js'
+import { animateSending } from './_ui-visuals.js'
+import {validateInputEvent, validateAllFields as allFieldsGreen } from './_form-validation.js'
 /// <reference types= "jQuery" />
 
-let listActionsCache = { //quiza una clase o un proto sea mejor
-  deletedIds: [],
-  newEntries: [],
-  setDeletion(id) {
-    this.deletedIds.push(id);
-    updateStatus()
-  },
-  setNewEntrie(entrie) {
-    this.newEntries.push(entrie)
-    updateStatus()
-  }
-};
 
-let changesStaged = false
-let $targetContainer;
 let tagName = ''
-
+let $targetContainer;
 $('.Read, .Update, .Create, .Delete').on('click',function(e) {
   tagName = this.className.match(/[CRUD].+/)[0];
   $targetContainer = e.target.closest('.media') || createContainer()
-  createModal($targetContainer.dataset) 
+  createModal($targetContainer.dataset)
 });
 
 function createModal(props){
   $('#viewer-pop-up .modal-dialog').empty()
-  delete props.seedlist
-  delete props.id
-  const {cresturl, name } = props 
+  const { id, seedlist, ...publicValues} = props
+  const { name, cresturl } = props
+
   const $newModal = $(`<div class="modal-content pop-up">
   ${headerControler(tagName, name, cresturl)}
-  ${bodyController(tagName, props)}
+  ${bodyController(tagName, publicValues)}
   ${footerController(tagName)}
   </div>`)
-
+  $('.modal-body').text('')
   $('#viewer-pop-up .modal-dialog').append($newModal)
-
-  $('.modal-cross-close').on('click', () => {
-    console.log('clicked')
-    changesStaged = false; 
-  });
+  $('input').on('change', validateInputEvent)
   $('.form-save').on('click', () => {
-    console.log(changesStaged, 'clicked')
-    changesStaged = true; 
+    if(!allFieldsGreen()) return
+    const { dataset }  = $targetContainer
+    $('input').each(function () {dataset[this.id] = this.value || $('input[type=file]').attr('value')}) 
+    console.log(dataset, 'DATASET')
+    dataset.action = tagName
+    let request = new FormData();
+    let file;  
+    try { file = $('#cresturl')[0].files[0] } catch { file = null }
+    if(file) request.append('avatar', file);
+    request.append('entries', JSON.stringify(dataset));
+    animateSending($('.form-save')[0])
+
+    $.ajax({
+      'method': 'POST',
+      'url': '/postTeam',
+      'data': request,
+      'contentType': false,
+      'processData': false,
+      'enctype': 'multipart/form-data',
+
+    }).done((serverResponse, param2, param3)=>{
+      $('#status-bar').text(serverResponse)
+      setTimeout(()=>{
+      animateSending($('.form-save')[0], true)
+      $('.close-modal').on('click', ()=> location.reload())
+      $('.close-modal').text('Refresh Page') 
+      },500)
+    })
   });
-  $('.close-modal').on('click', () => {
-    console.log('clicked')
-    if (tagName === 'Read') return
-    if (changesStaged === true) {
-      console.log(listActionsCache.newEntries)
-      crudActions[tagName]()
-      changesStaged = false
-    }
-  })
 }
 
-const crudActions = {
-  Create() {
-    document.querySelector('.media').before($targetContainer)
-    $targetContainer.dataset.id = 'PRE_TAG_NEW_ITEM'
-    $targetContainer.id = ''
-    this.Update()
-  },
-  Update() {
-    dumpNewDataInDataset()
-    showcaseNewEntrie($targetContainer)
-    listActionsCache.setNewEntrie($targetContainer.dataset);
-  },
-  Delete() {
-    $targetContainer.remove();
-    listActionsCache.setDeletion($targetContainer.id);
-  },
-}
 function createContainer() {
-  const $newMedia = $('.media').clone(true)[0] //true~attach listeners
+  const $newMedia = $('.media').clone()[0]
   Object.keys($newMedia.dataset).forEach(key => $newMedia.dataset[key] = '')
   return $newMedia
 }
-function dumpNewDataInDataset() {
-  $('#viewer-pop-up .modal-body').children('input').each(function() {
-    $targetContainer.dataset[$(this)[0].id] = $(this)[0].value || 
-    document.querySelector('input[type=file]').getAttribute('value');
-    console.log(document.querySelector('input[type=file]'), 'FILE')
-    console.log( document.getElementById("cresturl").files)
-
-  });
-}
-$('#send-data-button').on('click', function() {
-  animateSending(this)
-  $.ajax({
-    'method': 'POST',
-    'url': 'http://localhost:8080/posteam',
-    'contentType': 'application/json',
-    'data': JSON.stringify(listActionsCache)
-  }).done((serverResponse, param2, param3)=>{
-      listActionsCache.deletedIds = []
-      listActionsCache.newEntries = []
-      setTimeout(()=>{
-      animateSending(this, true)
-      updateStatus(true, serverResponse)
-      },500)
-  })
-})
-
 
 /* paginator logics */
 

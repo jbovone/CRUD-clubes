@@ -1,16 +1,15 @@
 const multer = require('multer');
 const path = require('path');
-const isAllowed = require('./request-validation').image
+const isAllowed = require('./request-validation').isAllowed;
 
 const storage = multer.diskStorage({
   destination: function (req, file, nextCallback) {
     nextCallback(null, path.join(__dirname, 'assets', 'uploads'),)
   },
   filename: function (req, file, nextCallback) {
-    console.log(file)
     const ext = path.extname(file.originalname)
     if(isAllowed(ext)){
-      nextCallback(null, `${file.fieldname}-${Date.now()}${ext}`) //null is err parameter  
+      nextCallback(null, `${file.fieldname}-${Date.now()}${ext}`) //null is err param  
     } else {
       nextCallback('Mismatch File Extention')    
     }  
@@ -19,7 +18,7 @@ const storage = multer.diskStorage({
 const uploads = multer({ 
   storage: storage, 
   limits:{
-    fileSize: 190000,
+    fileSize: 1900000,
     fieldNameSize: 300,
   }   
 }).single('avatar')  

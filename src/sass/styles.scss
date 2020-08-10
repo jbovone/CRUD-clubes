@@ -72,40 +72,14 @@ body>footer {
     align-items: center;
     color: white;
 }   
- .team-list-button-nav {
-    display: flex;
-    flex-flow: row-reverse;
-    align-items: center;
-    max-width: 800px;
+.team-list-button-nav {
     button{
+        max-width: 70px;
         padding: 15px 10px;
     }
- }
- .team-list-nav{
-     max-height: 30px;
-    display: flex;
-    flex-flow: column-reverse wrap;
-    justify-items: space-evenly;
- }
- #status-bar{
-  flex: 2;
-  text-align: center;
-  color:theme-color-level(primary, -2);
- }
-
- .active-changes {
-    animation-name: alert;
-    animation-timing-function:ease-in-out;
-    animation-duration: 0.8s;
-    animation-iteration-count: infinite;
-
-     @keyframes alert {
-         50%{
-           transform: scale(1.006) skew(1deg);
-           color: $red;
-         }
-     }
 }
+
+
 .disabled {
     color: gray !important;
     opacity: 0.5;

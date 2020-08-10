@@ -14,10 +14,11 @@ class Teamlist {
 
   static setPagination(teams, teamsPerPage = 10) {
     let prependTeams = [null];
-    for (let i = 1; i <= teams.length; i += teamsPerPage) {
+    for (let i = 0; i < teams.length; i += teamsPerPage) {
       let page = [];
-      for (let j = i; j <= teamsPerPage + i; j++) {
-        page.push(teams[j])
+      for (let j = i; j < teamsPerPage + i; j++) {
+        if(!teams[j]) break; 
+        page.push(teams[j]);
       }
       prependTeams.push(page)
     }

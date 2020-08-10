@@ -1,3 +1,5 @@
+import { required } from './_form-validation.js'
+
 export function bodyController(tagName, props){
   if(tagName === 'Delete') {
     return `<div class="modal-body">Are You Sure?</div>`  
@@ -7,7 +9,7 @@ export function bodyController(tagName, props){
       return appendViewer  
   })()
   let $bodyContents = ''
-  Object.entries(props).forEach((map) => {    
+  Object.entries(props).forEach((map) => {  
     $bodyContents+=appendBody(map[0], map[1])
   });
   return`<div class="modal-body">${$bodyContents}</div>`
@@ -20,7 +22,7 @@ export function footerController(tagName) {
 export function headerControler(tagName = 'Team', name, href = ''){ 
   const type = getStyle(tagName)
   let icon = ''  
-  if(href) icon = `<img src='${href}'></img>`
+  if(href) icon = `<img src='${href}'/>`
   return modalHeader(`${icon} ${tagName} ${name}`, type)
 }
 function isEditable(tagName){
@@ -41,10 +43,9 @@ function modalHeader(title, type){
   )
 }
 function appendViewer(name, value){
-    if (name === 'cresturl') return
+  if (name === 'cresturl') return ''
     return (
-        `<div>${formatName(name)}</div>
-         <div>${value}</div>`  
+        `<div>${formatName(name)}</div><div>${value}</div>`  
     )
  }
  function appendForm(name, value){
@@ -52,10 +53,15 @@ function appendViewer(name, value){
      if(tag === 'cresturl') return'file'
      else return'text'
     })(name)    
+  let placeholder = ''  
+  if(required.includes(name)) placeholder = 'Required Field.' 
+  else  placeholder = 'Optional Field.'
 
    return (
     `<label for="${name}">${formatName(name)}</label> 
-     <input id="${name}" type="${type}" value="${value}">`
+     <input id="${name}" placeholder="${placeholder}" type="${type}" value="${value}">
+     <span class="text-danger" style="font-size: 12px;"></span>
+     `
    )
 }
 function formatName(name){
@@ -65,6 +71,7 @@ function formatName(name){
 function modalFooter(type, saveBtn = ''){
     return (
         `<div class="modal-footer border-${type}">
+          <div id="status-bar"></div>
          <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button> 
          ${saveBtn}
         </div>`

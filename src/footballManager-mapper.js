@@ -1,8 +1,7 @@
-const getTeams = require('./vendors/footballManager');
 const TeamSchema = require('./entities/team');
 const TeamListSchema = require('./entities/teamsList');
 
-module.exports = (async (factory) => factory(JSON.parse(await getTeams())))((teamsData) => {
+module.exports = (teamsData) => {
   const list = new TeamListSchema(
     teamsData.count,
     teamsData.competition.name,
@@ -20,5 +19,5 @@ module.exports = (async (factory) => factory(JSON.parse(await getTeams())))((tea
       i,
     )),
   );
-  return new Promise((resolve) => resolve(list));
-});
+  return list;
+}

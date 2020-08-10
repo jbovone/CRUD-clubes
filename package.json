@@ -2,7 +2,7 @@
   "name": "crud-clubes",
   "version": "1.0.0",
   "description": "A sample interface CRUD: create read update delete. It consumes football-data.org API and format de data into a crud interface.",
-  "main": "index.js",
+  "main": "src/server.js",
   "dependencies": {
     "@popperjs/core": "^2.4.4",
     "axios": "^0.19.2",
@@ -15,18 +15,21 @@
     "multer": "^1.4.2"
   },
   "devDependencies": {
-    "bootstrap-icons": "^1.0.0-alpha5",
     "@types/jquery": "^3.5.1",
+    "bootstrap-icons": "^1.0.0-alpha5",
     "cypress": "^4.11.0",
     "eslint": "^7.3.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-jquery": "^3.0.0",
     "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jquery": "^1.5.1",
     "nodemon": "^2.0.4"
   },
   "scripts": {
+    "start": "node ./src/server.js",
     "dev": "nodemon ./src/server.js",
+    "app": "node src/server.js",
     "cypress": "cypress open",
     "cypress-run": "cypress run",
     "test": "echo \"Error: no test specified\" && exit 1"

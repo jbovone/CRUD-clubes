@@ -1,6 +1,8 @@
 module.exports = {
-    image: (ext)=>{
+  isAllowed: (ext)=>{
       return  /\.jpg|\.jpeg|\.png|\.svg/.test(ext)
     },
-    valid: ()=> true // for testing!
+  validBody: (body)=> {
+    return true
+  } // for testing!
 }   

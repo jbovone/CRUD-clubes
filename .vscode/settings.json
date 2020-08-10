@@ -4,7 +4,6 @@
     "eslint.alwaysShowStatus": true,
     "eslint.format.enable": true,
     "eslint.codeActionsOnSave.mode": "all",
-    "eslint.options": {},
     "liveSassCompile.settings.formats": [
         {
             "extensionName": ".css",

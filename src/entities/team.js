@@ -1,13 +1,13 @@
 class Team {
-  constructor(name, crestUrl, venue, founded, phone, website, email, clubcolors, seedList, id) {
+  constructor(name, cresturl, venue, founded, phone, website, email, clubcolors, seedList, id) {
     this.name = name;
-    this.crestUrl = crestUrl;
+    this.cresturl = cresturl || './assets/null.svg';
     this.venue = venue;
     this.founded = founded;
-    this.phone = phone;
-    this.website = website;
-    this.email = email;
-    this.clubcolors = clubcolors;
+    this.phone = phone || 'Not Provided';
+    this.website = website || 'Not Provided';
+    this.email = email || 'Not Provided';
+    this.clubcolors = clubcolors || 'Not Provided';
     this.seedList = seedList;
     this.id = id;
   }

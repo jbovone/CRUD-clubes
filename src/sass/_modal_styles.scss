@@ -14,6 +14,9 @@
     label {
         margin-bottom: 1px;
     }
+    span {
+        align-self: center;
+    }
     input {
         width: 100%;
         margin-bottom: 7px;
@@ -31,11 +34,23 @@
             height: 55px;
         }
     }
+    input[valid=false]{
+        $border-color: $form-feedback-valid-color;
+    }
+    input[valid=true]{
+        $border-color: $form-feedback-invalid-color;
+    }
     input[type=file]{
         order: 1;
     }
     label[for=cresturl]{
         order: 1;
+    }
+    #cresturl + span{
+        order: 1;
+    }
+    #status-bar{
+        flex: auto;
     }
 
 }

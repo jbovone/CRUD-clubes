@@ -8,6 +8,7 @@ const API_TOKEN = process.env.API_FOOTBALL_TOKEN;
 const RESOURCE_PATH = path.join(process.cwd(), 'src', 'vendors', 'teamData.json');
 
 async function getTeamsList(id = '2001') {
+  console.log('gettttingg.......')
   const teams = `competitions/${id}/teams`;
   const response = await axios.get(`${API_BASE}${teams}`, {
     headers: {
@@ -15,21 +16,13 @@ async function getTeamsList(id = '2001') {
     },
     responseType: 'stream',
   });
-
-  const teamDataStream = fs.createWriteStream(RESOURCE_PATH);
+  
+  const teamDataStream = fs.createWriteStream(RESOURCE_PATH, 'utf8');
   response.data.pipe(teamDataStream);
+  await missionApollo(teamDataStream);
 
-  const teamData = await new Promise((resolve, reject) => {
-    teamDataStream.on('finish', () => {
-      resolve(
-        fs.readFileSync(RESOURCE_PATH, 'utf-8'),
-      );
-      reject(
-        new events.EventEmitter().emit('status 500'),
-      );
-    });
-  });
-  return teamData;
+  const data = fs.readFileSync(RESOURCE_PATH)
+  return Promise.resolve(teamData)
 }
 
 module.exports = async () => {
@@ -38,9 +31,28 @@ module.exports = async () => {
     teamData = fs.readFileSync(RESOURCE_PATH, 'utf8');
   } catch {
     if (Boolean(API_TOKEN) === false) {
-      new events.EventEmitter().emit('status 500');
+      console.log('INVAILD API TOKEN')
+    }  else {
+      teamData = await getTeamsList();
     }
-    teamData = await getTeamsList();
   }
   return Promise.resolve(teamData);
 };
+
+function missionApollo(missionControl){
+  return new Promise(resolve =>{
+    let thrusters = 1000
+    const apollo11 = setInterval(()=>{
+      thrusters+=1000
+    }, 1000)
+
+    setTimeout(()=>{
+      resolve('Landed')
+    }, thrusters)
+
+    missionControl.on('finish',()=>{
+      console.log('FINISH')
+      global.clearInterval(apollo11)
+    })
+  })
+}
