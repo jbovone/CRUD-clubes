@@ -3,7 +3,7 @@ consumes the api https://www.football-data.org and formats the contents to a int
  
 ## thanks R/A fullstack bootcamp:
 https://argentinaprograma.com/
-
+ ```javascript
 /**
  *  -CRUD~MODALS  
  *  
